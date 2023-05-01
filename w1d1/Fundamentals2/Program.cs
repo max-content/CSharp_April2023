@@ -18,15 +18,15 @@
 bool[] BoolArr = new bool[9];
 
 int idx = 0;
-while (idx > BoolArr.Length)
+while (idx < BoolArr.Length)
 {
     Console.WriteLine("I am here");
     if (idx % 2 == 0 )
     { 
-        BoolArr[idx] = false;
+        BoolArr[idx] = true;
     } else 
     {
-        BoolArr[idx] = true;
+        BoolArr[idx] = false;
     }
     idx ++;
 }
@@ -92,5 +92,3 @@ foreach(KeyValuePair<string,string> entry in iceCreamFavs)
 {
     Console.WriteLine($"{entry.Key} - {entry.Value}");
 }
-
-
