@@ -1,4 +1,4 @@
-﻿Vehicle MyVehicle = new Vehicle("Car", "blue");
+﻿fVehicle MyVehicle = new Vehicle("Car", "blue");
 Vehicle MySkates = new Vehicle("Skates", "white", false, 1);
 Vehicle MyBike = new Vehicle("Bicycle", "pink", false, 2, 67);
 

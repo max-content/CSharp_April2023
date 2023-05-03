@@ -32,14 +32,14 @@
 // Console.WriteLine(sum);
 
 int j = 1;
-// int sum = 0;
-// Random randAlThor = new Random();
-// while (j < 6)
-// {
-//     sum += randAlThor.Next(10,20);
-//     j++;
-// }
-// Console.WriteLine(sum);
+int sum = 0;
+Random randAlThor = new Random();
+while (j < 6)
+{
+    sum += randAlThor.Next(10,20);
+    j++;
+}
+Console.WriteLine(sum);
 
 
 // // // Create a new loop that prints all values from 1 to 100 that are divisible by 3 OR 5, but NOT both.
