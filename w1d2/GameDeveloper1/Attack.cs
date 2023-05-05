@@ -1,4 +1,4 @@
-class Attack
+public class Attack
 {
     public string Name {get;set;}
 
