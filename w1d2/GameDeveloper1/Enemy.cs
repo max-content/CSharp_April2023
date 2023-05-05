@@ -1,16 +1,16 @@
-class Enemy
+public class Enemy
 {
-    public string Name {get;set;}
+    public string Name;
     public List<Attack> AttackList;
-    private int Health;
-    public int _Health {get;set;}
+    private int _health;
+    public int Health;
 
 
-    public Enemy(string name, int health = 100)
+    public Enemy(string name, int _health = 100)
     {
         Name = name;
         AttackList = new List<Attack>();
-        _Health = health;
+        Health = _health;
     }
 
     public Attack RandomAttack(List<Attack> attackList)
@@ -28,4 +28,10 @@ class Enemy
         return AttackList;
     }
 
+// The Start of Game Developer II Assignment
+    public void PerformAttack(Enemy target, Attack chosenAttack) 
+    {
+        int TargetHealth = target.Health - chosenAttack.DamageAmount;
+        Console.WriteLine($"{Name} attacks {target.Name} with {chosenAttack.Name} dealing {chosenAttack.DamageAmount} reducing {target.Name}'s health to {TargetHealth}");
+    }
 }
