@@ -17,3 +17,19 @@ OR
    - this creates an app that doesn't have the support for https and the security features that comes with.
 2. `dotnet run` or `dotnet watch run` (which will open the port for you)
 *Note: The port is randomly selected between 5000 and 5300 you can find this in the terminal but also in Properties > launchSettings.json file*
+3. if using web creation method add this to your Program.cs file:
+```cs
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+
+app.MapControllerRoute(
+    name: "defualt",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+```
