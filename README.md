@@ -33,3 +33,26 @@ app.MapControllerRoute(
 
 app.Run();
 ```
+4. Create folder named Controllers
+5. create HomeController:
+```cs
+public class HomeController : Controller
+{
+    [HttpGet]
+    [Route("test")] //the / before the route isn't necessary
+    public string Test()
+    {
+        return "Hello World from HomeController!";
+
+    }
+    
+    [HttpGet]
+    [Route("")] //the / before the route isn't necessary
+    public ViewResult Index()
+    {
+        return View();
+
+    }
+    
+}
+```

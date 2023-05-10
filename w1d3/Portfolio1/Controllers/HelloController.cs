@@ -19,6 +19,6 @@ public class HelloController : Controller
     [HttpGet("contact")]
     public string Contact()
     {
-        return "This is my contact information!";
+        return "This is my contact information!"
     }
 }
