@@ -1,24 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-namespace FirstWeb.Controllers;
+namespace Portfolio1.Controllers;
 
 public class HelloController : Controller
 {
     [HttpGet("")]
-    public string Index()
+    public ViewResult Index()
     {
-        return "This is my Index!";
+        return View("Index");
 
     }
 
     [HttpGet("projects")]
-    public string Projects()
+    public ViewResult Projects()
     {
-        return "These are my projects";
+        return View("Projects");
     }
 
     [HttpGet("contact")]
-    public string Contact()
+    public ViewResult Contact()
     {
-        return "This is my contact information!"
+        return View("Contact");
     }
 }
