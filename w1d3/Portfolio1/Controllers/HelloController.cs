@@ -7,7 +7,6 @@ public class HelloController : Controller
     public ViewResult Index()
     {
         return View("Index");
-
     }
 
     [HttpGet("projects")]
