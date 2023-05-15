@@ -13,10 +13,22 @@ public class HomeController : Controller
     
     [HttpGet]
     [Route("")]
-    public ViewResult Index()
+    public IActionResult Index()
     {
         return View();
 
     }
     
+    [HttpPost("process")]
+    public IActionResult Process(string Name, string City, string Language, string Comments)
+    {
+
+        Console.WriteLine($"{Name} {City} {Language} {Comments}");
+        ViewBag.Name = Name;
+        ViewBag.City = City;
+        ViewBag.Language = Language;
+        ViewBag.Comments = Comments;
+
+        return View("Results");
+    }
 }
