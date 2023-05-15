@@ -64,7 +64,7 @@ public class HomeController : Controller
     
     [HttpGet]
     [Route("")] //the / before the route isn't necessary
-    public ViewResult Index()
+    public IActionResult Index()
     {
         return View();
 
