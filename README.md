@@ -72,3 +72,23 @@ public class HomeController : Controller
     
 }
 ```
+
+### New MVC Project
+1. Instead of new web or new console we're going to create a new mvc project with `dotnet new mvc --no-https -o ProjectName`
+2. Create our model: 
+```cs
+#pragma warning disable CS8618
+namespace FirstMVC.Models;
+
+
+public class Friend 
+{
+    public string FirstName {get;set;}
+    public string LastName {get;set;}
+    public string Location {get;set;}
+    public int Age {get;set;}
+}
+```
+*This first line will disable to warning that vs code gives us that these strings are Not-Nullable properties or you can write the property like this: or `public string FirstName {get;set;} = null;`*
+
+*To allow a string to be nullable say the field is optional you'd declare `public string? Location {get;set;}`*
