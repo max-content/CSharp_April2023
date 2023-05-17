@@ -92,3 +92,6 @@ public class Friend
 *This first line will disable to warning that vs code gives us that these strings are Not-Nullable properties or you can write the property like this: or `public string FirstName {get;set;} = null;`*
 
 *To allow a string to be nullable say the field is optional you'd declare `public string? Location {get;set;}`*
+
+### View Models
+at the top of a cshtml file we want to put `@model [datatype]` ie: `@model string` means we're expecting the controller to send the view model a string through the View object.
