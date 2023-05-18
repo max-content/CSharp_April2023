@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Results";
+}
+
+@model User
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Name: 
+        </div>
+        <div class="col">
+            @Model.Name
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            City:
+        </div>
+        <div class="col">
+            @Model.City
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Favorite Language:
+        </div>
+        <div class="col">
+            @Model.Language
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Comments:
+        </div>
+        <div class="col">
+            @Model.Comments
+        </div>
+    </div>
+</div>
