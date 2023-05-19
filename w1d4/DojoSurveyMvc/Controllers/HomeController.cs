@@ -19,15 +19,15 @@ public class HomeController : Controller
     }
 
     [HttpPost("process")]
-    public IActionResult SubmitSurvey(User user) 
+    public IActionResult SubmitSurvey(Survey survey) 
     {
-        return RedirectToAction("Results", user);
+        return RedirectToAction("Results", survey);
     }
 
     [HttpGet("results")]
-    public IActionResult Results(User user)
+    public IActionResult Results(Survey survey)
     {
-        return View("Results", user);
+        return View("Results", survey);
     }
     public IActionResult Privacy()
     {
@@ -40,3 +40,4 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+// huh?? 

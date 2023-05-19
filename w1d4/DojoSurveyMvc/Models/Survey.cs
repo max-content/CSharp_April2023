@@ -2,7 +2,7 @@
 namespace DojoSurveyMvc.Models;
 
 
-public class User 
+public class Survey 
 {
     public string Name {get;set;}
     public string City {get;set;}
