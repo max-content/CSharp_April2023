@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using FirstMVC.Models;
+using DojoSurveyMvc.Models;
 
-namespace FirstMVC.Controllers;
+namespace DojoSurveyMvc.Controllers;
 
 public class HomeController : Controller
 {
@@ -15,30 +15,20 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-
-        Friend Max = new Friend()
-        {
-            FirstName = "Max",
-            LastName = "R",
-            Location = "Miami",
-            Age = 33
-        };
-        return View(Max);
+        return View();
     }
 
-    [HttpPost("register")]
-    public RedirectResult RegisterWizard(HogwartsStudent student) 
+    [HttpPost("process")]
+    public IActionResult SubmitSurvey(User user) 
     {
-        Console.WriteLine($"{student.Name} {student.House} {student.CurrentYear}");
-        return Redirect("/");
+        return RedirectToAction("Results", user);
     }
 
-    [HttpGet("yerawizard")]
-    public IActionResult WizardForm()
+    [HttpGet("results")]
+    public IActionResult Results(User user)
     {
-        return View("WizardForm");
+        return View("Results", user);
     }
-
     public IActionResult Privacy()
     {
         return View();

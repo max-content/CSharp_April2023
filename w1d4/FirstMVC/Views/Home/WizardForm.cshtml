@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Wizard Form";
+}
+
+@model HogwartsStudent
+
+<div class="container">
+    <form action="register" method="POST">
+        <div class="mb-3 row">
+            <label for="name" class="col-4 col-form-label">Name</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="Name">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="House" class="form-label">House</label>
+            <select class="form-select form-select-lg" name="House" id="">
+                <option value="Gryffindor">Gryffindor</option>
+                <option value="Hufflepuff">Hufflepuff</option>
+                <option value="Ravenclaw">Ravenclaw</option>
+                <option value="Slytherin">Slytherin</option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label for="CurrentYear" class="form-label">Current Year</label>
+          <input type="number" class="form-control" name="CurrentYear" />
+
+        </div>
+        <div class="mb-3 row">
+            <div class="offset-sm-4 col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

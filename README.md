@@ -95,3 +95,13 @@ public class Friend
 
 ### View Models
 at the top of a cshtml file we want to put `@model [datatype]` ie: `@model string` means we're expecting the controller to send the view model a string through the View object.
+
+
+### Inside the cshtml files in the Views folders
+We will inherit the layout so the top of our code just has to have 
+```cs
+@{
+    ViewData["Title"] = "Home Page";
+}
+```
+and then change the title string. This will change the title of the webpage. Then we can just start with our div tag and write our code.
