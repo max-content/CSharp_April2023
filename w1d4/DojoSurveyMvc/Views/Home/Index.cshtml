@@ -2,52 +2,57 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model Survey
 <div class="container mt-5">
 
         <h1>Dojo Survey</h1>
             <form action="process" method="post">
                 <div class="row justify-content-center align-items-center">       
                     <div class="col-auto">
-                        <label for="Name" class="form-label">Your Name</label>
+                        <label asp-for="Name" class="form-label">Your Name</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" class="form-control" name="Name">
+                        <input type="text" class="form-control" asp-for="Name">
+                        <span asp-validation-for="Name"></span>
                     </div>
                 </div>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-auto">
-                        <label for="City" class="form-label">City</label>
+                        <label asp-for="City" class="form-label">City</label>
                     </div>
                     <div class="col-auto">
-                        <select class="form-select form-select-lg" name="City" id="">
-                            <option selected>Select one</option>
+                        <select asp-for="City" class="form-select form-select-lg" name="City" id="">
+                            <option value="">Select one</option>
                             <option value="LosAngeles">Los Angeles</option>
                             <option value="Chicago">Chicago</option>
                             <option value="Seatle">Seatle</option>
                             <option value="Remote">Remote </option>
                         </select>
+                        <span asp-validation-for="City"></span>
                     </div>
                 </div>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-auto">
-                        <label for="Language" class="form-label">Favorite Language</label>
+                        <label asp-for="Language" class="form-label">Favorite Language</label>
                     </div>
                     <div class="col-auto">
-                        <select class="form-select form-select-lg" name="Language" id="">
-                            <option selected>Select one</option>
+                        <select asp-for="Language" class="form-select form-select-lg" name="Language" id="">
+                            <option value="">Select one</option>
                             <option value="C#">C#</option>
                             <option value="JavaScript">JavaScript</option>
                             <option value="Python">Python</option>
                             <option value="Java">Java </option>
                         </select>
+                        <span asp-validation-for="Language"></span>
                     </div>
                 </div>
-                <div class="row justify-content-center align-items-center">       
+                <div class="row justify-content-center align-items-center">
                     <div class="col-auto">
-                        <label for="Comments" class="form-label px-5">Comments (Optional) </label>
+                        <label asp-for="Comments" class="form-label px-5">Comments (Optional) </label>
                     </div>
                     <div class="col-auto">
-                        <textarea name="Comments"> </textarea>
+                        <input asp-for="Comments" />
+                        <span asp-validation-for="Comments"></span>
                     </div>
                     <div class="row justify-content-center align-items-center">
                         <div class="col-auto"> 
