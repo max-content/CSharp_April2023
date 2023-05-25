@@ -10,28 +10,56 @@
 <body>
     <div class="container mt-5">
 
-        <h1>Hello World!</h1>
-            <form action="">
+        <h1>Dojo Survey</h1>
+            <form action="process" method="post">
                 <div class="row justify-content-center align-items-center g-2 d-flex">       
-                    <div class="col-auto">
-                        <label for="your_name" class="form-label px-5">Your Name</label>
+                    <div class="col-auto justify-content-left">
+                        <label for="Name" class="form-label px-5">Your Name</label>
                     </div>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" name="your_name">
+                    <div class="col-auto justify-content-left">
+                        <input type="text" class="form-control" name="Name">
                     </div>
                 </div>
                 <div class="row justify-content-center align-items-center g-2 d-flex">
-                    <div class="col-auto">
-                        <label for="" class="form-label">City</label>
+                    <div class="col-auto justify-content-left">
+                        <label for="City" class="form-label">City</label>
                     </div>
-                    <div class="col-auto">
-                        <select class="form-select form-select-lg" name="" id="">
+                    <div class="col-auto justify-content-left">
+                        <select class="form-select form-select-lg" name="City" id="">
                             <option selected>Select one</option>
-                            <option value="">New Delhi</option>
-                            <option value="">Istanbul</option>
-                            <option value="">Jakarta</option>
+                            <option value="LosAngeles">Los Angeles</option>
+                            <option value="Chicago">Chicago</option>
+                            <option value="Seatle">Seatle</option>
+                            <option value="Remote">Remote </option>
                         </select>
                     </div>
+                </div>
+                <div class="row justify-content-center align-items-center g-2 d-flex">
+                    <div class="col-auto justify-content-left">
+                        <label for="Language" class="form-label">Favorite Language</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select form-select-lg" name="Language" id="">
+                            <option selected>Select one</option>
+                            <option value="C#">C#</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="Python">Python</option>
+                            <option value="Java">Java </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center g-2 d-flex">       
+                    <div class="col-auto justify-content-left">
+                        <label for="Comments" class="form-label px-5">Comments (Optional) </label>
+                    </div>
+                    <div class="col-auto justify-content-left">
+                        <textarea name="Comments"> </textarea>
+                    </div>
+                    <div class="row justify-content-center align-items-center g-2">
+                        <div class="col-auto justify-content-left"> 
+                        <input class="btn btn-primary" type="submit" value="Submit"/>
+                    </div>
+                </div>
                 </div>
             </form>
         </div>
