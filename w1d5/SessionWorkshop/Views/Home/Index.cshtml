@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Session Workshop";
+}
+
+@model User
+
+<div class="container mt-5 text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2> Please give your name: </h2>
+
+    <form action="process" method="POST">
+        <input  type="text" asp-for="FirstName" />
+        <button type="submit" class="btn btn-success"> Submit </button>
+    </form>
+</div>

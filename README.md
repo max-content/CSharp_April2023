@@ -105,3 +105,24 @@ We will inherit the layout so the top of our code just has to have
 }
 ```
 and then change the title string. This will change the title of the webpage. Then we can just start with our div tag and write our code.
+
+### Session
+Start by adding this block of code to the Program.cs file
+```
+builder.Services.AddHttpContextAccessor();  
+builder.Services.AddSession();  
+
+app.UseSession();
+```
+
+* controller example with int? (because in this case we may receive a null value we add the ?)
+```
+// To store an int in session we use ".SetInt32"
+HttpContext.Session.SetInt32("UserAge", 28);
+// To retrieve an int from session we use ".GetInt32"
+int? IntVariable = HttpContext.Session.GetInt32("UserAge");
+```
+
+* To Clear session `HttpContext.Session.Clear();`
+
+* In cshtml file `@Context.Session.GetString("KeyName")` where keyname is the value of the key setup in the controller.
