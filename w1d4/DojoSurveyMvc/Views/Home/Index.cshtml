@@ -5,9 +5,9 @@
 @model Survey
 <div class="container mt-5">
 
-        <h1>Dojo Survey</h1>
-            <form action="process" method="post">
-                <div class="row justify-content-center align-items-center">       
+        <h1 class="mb-5 text-center">Dojo Survey</h1>
+            <form class="mx-auto w-50" action="process" method="post">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col-auto">
                         <label asp-for="Name" class="form-label">Your Name</label>
                     </div>
@@ -16,7 +16,7 @@
                         <span asp-validation-for="Name"></span>
                     </div>
                 </div>
-                <div class="row justify-content-center align-items-center">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col-auto">
                         <label asp-for="City" class="form-label">City</label>
                     </div>
@@ -31,7 +31,7 @@
                         <span asp-validation-for="City"></span>
                     </div>
                 </div>
-                <div class="row justify-content-center align-items-center">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col-auto">
                         <label asp-for="Language" class="form-label">Favorite Language</label>
                     </div>
@@ -46,19 +46,19 @@
                         <span asp-validation-for="Language"></span>
                     </div>
                 </div>
-                <div class="row justify-content-center align-items-center">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col-auto">
-                        <label asp-for="Comments" class="form-label px-5">Comments (Optional) </label>
+                        <label asp-for="Comments" class="form-label">Comments (Optional) </label>
                     </div>
                     <div class="col-auto">
                         <input asp-for="Comments" />
                         <span asp-validation-for="Comments"></span>
                     </div>
-                    <div class="row justify-content-center align-items-center">
+                    <div class="row mb-3 justify-content-end align-items-center">
                         <div class="col-auto"> 
-                        <input class="btn btn-primary" type="submit" value="Submit"/>
+                            <input class="mt-3 btn btn-primary" type="submit" value="Submit"/>
+                        </div>
                     </div>
-                </div>
                 </div>
             </form>
         </div>
