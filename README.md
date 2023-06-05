@@ -131,16 +131,16 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
 *installed globally with `dotnet tool install --global dotnet-ef` or can be added manually to each project with `dotnet ef`*
 
 # Full CRUD Project Setup
-- [ ] Create a new project `dotnet new mvc --no-https -o ProjectName`
-- [ ] cd into new project
-- [ ] Add dependencies 
+- [x] Create a new project `dotnet new mvc --no-https -o ProjectName`
+- [x] cd into new project
+- [x] Add dependencies 
     ```
         dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.1
         dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
     ```
     can be check by looking at the ProjectName.csproj file 
     #### Models
-- [ ] create models
+- [x] create models
     ```
     #pragma warning disable CS8618
     using System.ComponentModel.DataAnnotations;
@@ -157,7 +157,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
     }
     ```
     *standard naming convention for model id is to name ModelNameID allows you to differenciate between different models you're working with.*
-- [ ] Add context file. The context file functions as the foundation of the relationship between the models and db.Naming these classes convention is to add Context at the end of the file name.
+- [x] Add context file. The context file functions as the foundation of the relationship between the models and db.Naming these classes convention is to add Context at the end of the file name.
     ```
         #pragma warning disable CS8618
         // We can disable our warnings safely because we know the framework will assign non-null values 
@@ -176,7 +176,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
             public DbSet<Monster> Monsters { get; set; } 
         }
     ```
-- [ ] in the `aspsettings.json` file replace the mvc generated text with:
+- [x] in the `aspsettings.json` file replace the mvc generated text with:
     ```
         {  
             "Logging": {    
@@ -193,7 +193,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
         }
     ```
     the section added is the ConnectionStrings this adds our database to our project.
-- [ ] Change the `Program.cs` file to:
+- [x] Change the `Program.cs` file to:
     ```
         using Microsoft.EntityFrameworkCore;
         // You will need access to your models for your context file
@@ -231,7 +231,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
 
         app.Run();
     ```
-- [ ] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
+- [x] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
 - [ ] Update db: `dotnet ef database update`
 if there are errors we can troubleshoot by running `dotnet ef migrations add FirstMigration -v` in the command prompt.
 
