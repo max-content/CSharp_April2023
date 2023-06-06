@@ -2,7 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model List<Dish>
+
+<h1 class="display-4 text-center">CRUDelishous</h1>
+
+    @foreach (Dish dish in Model)
+    {
+        <div class="row border-bottom border-succes">
+            <div class="col-2">
+                <p>
+                    <a href="/dish/@dish.DishId">@dish.Name</a>
+                </p>
+            </div>
+            <div class="col-2">
+                <p>
+                    @dish.Chef
+                </p>
+            </div>
+            <div class="col-2">
+                <p>
+                    @dish.Tastiness
+                </p>
+            </div>
+                    <div class="col-2">
+                <p>
+                    @dish.Calories
+                </p>
+            </div>
+            <div class="col-4">
+                <p>
+                    @dish.Description
+                </p>
+            </div>
+        </div>
+    }
+
+    <a href="/new" class="btn btn-primary mt-4" role="button">New Dish</a>
 </div>

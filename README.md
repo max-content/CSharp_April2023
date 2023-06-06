@@ -232,32 +232,29 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
         app.Run();
     ```
 - [x] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
-- [ ] Update db: `dotnet ef database update`
+- [x] Update db: `dotnet ef database update`
 if there are errors we can troubleshoot by running `dotnet ef migrations add FirstMigration -v` in the command prompt.
 
 #### Controller
-- [ ] add to controller:
-    ```
-        // Using statements
+- [x] add to controller:
+    ``` 
         using System.Diagnostics;
         using Microsoft.AspNetCore.Mvc;
         using YourProjectName.Models;
-        namespace YourProjectName.Controllers;    
+
+        namespace YourProjectName.Controllers;
+        
         public class HomeController : Controller
         {    
             private readonly ILogger<HomeController> _logger;
-            // Add a private variable of type MyContext (or whatever you named your context file)
             private MyContext _context;         
-            // Here we can "inject" our context service into the constructor 
-            // The "logger" was something that was already in our code, we're just adding around it   
+           
             public HomeController(ILogger<HomeController> logger, MyContext context)    
             {        
                 _logger = logger;
-                // When our HomeController is instantiated, it will fill in _context with context
-                // Remember that when context is initialized, it brings in everything we need from DbContext
-                // which comes from Entity Framework Core
                 _context = context;    
-            }         
+            } 
+
             [HttpGet("")]    
             public IActionResult Index()    
             {     

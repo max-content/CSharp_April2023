@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "View Dish";
+}
+
+@model Dish
+
+<div class="container">
+    <h1> @Model.Name by @Model.Chef </h1>
+    <p> @Model.Description</p>
+    <h4> Tastiness: @Model.Tastiness</h4>
+    <h4> Calories: @Model.Calories</h4>
+</div>
