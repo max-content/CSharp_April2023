@@ -264,7 +264,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             } 
         }
     ```
-- [ ] Create
+- [x] Create
     ```
         [HttpPost("monsters/create")]
         public IActionResult CreateMonster(Monster newMon)
@@ -285,7 +285,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             }
         }
     ```
-- [ ] View All
+- [x] View All
     ```
         [HttpGet("")]
         public IActionResult Index()
@@ -305,7 +305,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             return View();
         }
     ```
-- [ ] View One
+- [x] View One
     ```
     [HttpGet("monsters/{id}")]    
     public IActionResult ShowMonster(int id)    
