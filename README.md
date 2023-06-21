@@ -10,6 +10,7 @@ OR
 1. create new project running `dotnet new console -o ProjectName`
 2. cd into ProjectName
 
+
 4. / 3. `dotnet run`
 
 ### New Web Project
@@ -264,7 +265,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             } 
         }
     ```
-- [ ] Create
+- [x] Create
     ```
         [HttpPost("monsters/create")]
         public IActionResult CreateMonster(Monster newMon)
@@ -285,7 +286,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             }
         }
     ```
-- [ ] View All
+- [x] View All
     ```
         [HttpGet("")]
         public IActionResult Index()
@@ -305,7 +306,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             return View();
         }
     ```
-- [ ] View One
+- [x] View One
     ```
     [HttpGet("monsters/{id}")]    
     public IActionResult ShowMonster(int id)    
@@ -314,7 +315,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
         return View(OneMonster);  
     }
     ```
-- [ ] Update
+- [x] Update
     ```
     [HttpGet("monsters/{MonsterId}/edit")]
     public IActionResult EditMonster(int MonsterId)
@@ -354,8 +355,8 @@ Handling Post:
     </form>
     ```
 
-##### Delete:
-- [ ] Process Delete
+#### Delete:
+- [x] Process Delete
     ```
     [HttpPost("monsters/{MonsterId}/destroy")]
     public IActionResult DestroyMonster(int MonsterId)
@@ -367,7 +368,7 @@ Handling Post:
         return RedirectToAction("Index");
     }
     ```
-- [ ] Form Handling:
+- [x] Form Handling:
     ```
     <form asp-action="DestroyMonster" asp-controller="Home" asp-route-MonsterId="@Model.MonsterId" method="post">
         <input type="submit" value="Delete">

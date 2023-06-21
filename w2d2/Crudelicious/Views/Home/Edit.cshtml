@@ -1,11 +1,11 @@
 @{
-    ViewData["Title"] = "New Dish";
+    ViewData["Title"] = "Edit Dish";
 }
 
 @model Dish
 
 <div class="container">
-    <form asp-action="CreateDish" asp-controller="Home" method="POST">
+    <form asp-action="UpdateDish" asp-controller="Home" asp-route-DishID="@Model.DishId" method="POST">
         <div class="mb-3">
             <label asp-for="Name" class="form-label">Name</label>
             <input asp-for="Name" class="form-control" />
