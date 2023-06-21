@@ -12,7 +12,7 @@ Enemy LittleBuddy = new Enemy("minion");
 LittleBuddy.AttackList.Add(Fireball);
 LittleBuddy.AttackList.Add(Punch);
 LittleBuddy.AttackList.Add(Mock);
-Console.WriteLine(String.Join(" ", LittleBuddy.RandomAttack(LittleBuddy.AttackList).Name));
+Console.WriteLine(LittleBuddy.RandomAttack(LittleBuddy.AttackList).Name);
 
 Console.WriteLine(LittleBuddy.Health);
 
@@ -25,6 +25,7 @@ LilBud2.AddAttack(DestroyEvil);
 Console.WriteLine(LilBud2.RandomAttack(LilBud2.AttackList).Name);
 
 // The start of Game Developer II Assignment
+
 LilBud2.PerformAttack(LittleBuddy, Fireball);
 
 MeleeFighter MeleeBoi = new MeleeFighter();

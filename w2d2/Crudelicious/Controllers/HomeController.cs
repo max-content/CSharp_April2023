@@ -49,6 +49,42 @@ public class HomeController : Controller
         return View(OneDish);
     }
 
+    [HttpGet("dish/{id}/edit")]
+    public IActionResult EditDish(int id)
+    {
+        Dish? OneDish = _context.Dishes.FirstOrDefault(dish => dish.DishId == id);
+        return View("Edit", OneDish);
+    }
+
+    [HttpPost("dish/{DishId}/update")]
+    public IActionResult UpdateDish(Dish newDish, int DishId)
+    {
+        Dish? OldDish = _context.Dishes.FirstOrDefault(i => i.DishId == DishId);
+        if(ModelState.IsValid)
+        {
+            OldDish.Name = newDish.Name;
+            OldDish.Chef = newDish.Chef;
+            OldDish.Tastiness = newDish.Tastiness;
+            OldDish.Calories = newDish.Calories;
+            OldDish.Description = newDish.Description;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else 
+        {
+            return View("EditDish", OldDish);
+        }
+    }
+
+    [HttpPost("dish/{DishId}/destroy")]
+    public IActionResult DestroyDish(int DishId)
+    {
+        Dish? DishToDelete = _context.Dishes.SingleOrDefault(i => i.DishId == DishId);
+        _context.Dishes.Remove(DishToDelete);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Privacy()
     {
         return View();
