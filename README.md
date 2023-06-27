@@ -134,12 +134,67 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
 # Full CRUD Project Setup
 - [x] Create a new project `dotnet new mvc --no-https -o ProjectName`
 - [x] cd into new project
-- [x] Add dependencies 
+- [x] Add dependencies in terminal
     ```
-        dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.1
-        dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
+    dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.1
+    dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
     ```
     can be check by looking at the ProjectName.csproj file 
+- [x] in the `aspsettings.json` file replace the mvc generated text with:
+    ```
+    {  
+        "Logging": {    
+            "LogLevel": {      
+                "Default": "Information",      
+                "Microsoft.AspNetCore": "Warning"    
+            }  
+        },
+        "AllowedHosts": "*",    
+        "ConnectionStrings":    
+        {        
+            "DefaultConnection": "Server=localhost;port=3306;userid=root;password=maxcontent;database=monsterdb;"    //<-- CHANGE DB NAME HERE 
+        }
+    }
+    ```
+    the section added is the ConnectionStrings this adds our database to our project.
+- [x] Change the `Program.cs` file to:
+    ```
+    using Microsoft.EntityFrameworkCore;
+    // You will need access to your models for your context file
+    using ProjectName.Models;
+    // Builder code from before
+    var builder = WebApplication.CreateBuilder(args);
+    // Create a variable to hold your connection string
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
+
+    // Make sure this is BEFORE var app = builder.Build()!!
+    builder.Services.AddDbContext<MyContext>(options =>
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.Run();
+    ```
     #### Models
 - [x] create models
     ```
@@ -160,133 +215,114 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
     *standard naming convention for model id is to name ModelNameID allows you to differenciate between different models you're working with.*
 - [x] Add context file. The context file functions as the foundation of the relationship between the models and db.Naming these classes convention is to add Context at the end of the file name.
     ```
-        #pragma warning disable CS8618
-        // We can disable our warnings safely because we know the framework will assign non-null values 
-        // when it constructs this class for us.
-        using Microsoft.EntityFrameworkCore;
-        namespace YourProjectName.Models;
-        // the MyContext class represents a session with our MySQL database, allowing us to query for or save data
-        // DbContext is a class that comes from EntityFramework, we want to inherit its features
-        public class MyContext : DbContext 
-        {   
-            // This line will always be here. It is what constructs our context upon initialization  
-            public MyContext(DbContextOptions options) : base(options) { }    
-            // We need to create a new DbSet<Model> for every model in our project that is making a table
-            // The name of our table in our database will be based on the name we provide here
-            // This is where we provide a plural version of our model to fit table naming standards    
-            public DbSet<Monster> Monsters { get; set; } 
-        }
-    ```
-- [x] in the `aspsettings.json` file replace the mvc generated text with:
-    ```
-        {  
-            "Logging": {    
-                "LogLevel": {      
-                    "Default": "Information",      
-                    "Microsoft.AspNetCore": "Warning"    
-                }  
-            },
-            "AllowedHosts": "*",    
-            "ConnectionStrings":    
-            {        
-                "DefaultConnection": "Server=localhost;port=3306;userid=root;password=maxcontent;database=monsterdb;"    //<-- CHANGE DB NAME HERE 
-            }
-        }
-    ```
-    the section added is the ConnectionStrings this adds our database to our project.
-- [x] Change the `Program.cs` file to:
-    ```
-        using Microsoft.EntityFrameworkCore;
-        // You will need access to your models for your context file
-        using ProjectName.Models;
-        // Builder code from before
-        var builder = WebApplication.CreateBuilder(args);
-        // Create a variable to hold your connection string
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-        // Add services to the container.
-        builder.Services.AddControllersWithViews();
-
-        // Make sure this is BEFORE var app = builder.Build()!!
-        builder.Services.AddDbContext<MyContext>(options =>
-        {
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        });
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
-        {
-            app.UseExceptionHandler("/Home/Error");
-        }
-        app.UseStaticFiles();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
-
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-
-        app.Run();
+    #pragma warning disable CS8618
+    // We can disable our warnings safely because we know the framework will assign non-null values 
+    // when it constructs this class for us.
+    using Microsoft.EntityFrameworkCore;
+    namespace YourProjectName.Models;
+    // the MyContext class represents a session with our MySQL database, allowing us to query for or save data
+    // DbContext is a class that comes from EntityFramework, we want to inherit its features
+    public class MyContext : DbContext 
+    {   
+        // This line will always be here. It is what constructs our context upon initialization  
+        public MyContext(DbContextOptions options) : base(options) { }    
+        // We need to create a new DbSet<Model> for every model in our project that is making a table
+        // The name of our table in our database will be based on the name we provide here
+        // This is where we provide a plural version of our model to fit table naming standards    
+        public DbSet<Monster> Monsters { get; set; } 
+    }
     ```
 - [x] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
 - [x] Update db: `dotnet ef database update`
 if there are errors we can troubleshoot by running `dotnet ef migrations add FirstMigration -v` in the command prompt.
 
 #### Controller
-- [x] add to controller:
+- [ ] add to controller:
     ``` 
-        using System.Diagnostics;
-        using Microsoft.AspNetCore.Mvc;
-        using YourProjectName.Models;
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using YourProjectName.Models;
 
-        namespace YourProjectName.Controllers;
-        
-        public class HomeController : Controller
-        {    
-            private readonly ILogger<HomeController> _logger;
-            private MyContext _context;         
-           
-            public HomeController(ILogger<HomeController> logger, MyContext context)    
-            {        
-                _logger = logger;
-                _context = context;    
-            } 
+    namespace YourProjectName.Controllers;
+    
+    public class HomeController : Controller
+    {    
+        private readonly ILogger<HomeController> _logger;
+        private MyContext _context;         
+       
+        public HomeController(ILogger<HomeController> logger, MyContext context)    
+        {        
+            _logger = logger;
+            _context = context;    
+        } 
 
-            [HttpGet("")]    
-            public IActionResult Index()    
-            {     
-                // Now any time we want to access our database we use _context   
-                List<Monster> AllMonsters = _context.Monsters.ToList();
-                return View();    
-            } 
+        [HttpGet("")]    
+        public IActionResult Index()    
+        {     
+            // Now any time we want to access our database we use _context   
+            List<Monster> AllMonsters = _context.Monsters.ToList();
+            return View();    
+        } 
+    }
+    ```
+- [ ] Create
+    ```
+    [HttpPost("monsters/create")]
+    public IActionResult CreateMonster(Monster newMon)
+    {    
+        if(ModelState.IsValid)
+        {
+            // We can take the Monster object created from a form submission
+            // and pass the object through the .Add() method  
+            // Remember that _context is our database  
+            _context.Add(newMon);    
+            // OR _context.Monsters.Add(newMon); if we want to specify the table
+            // EF Core will be able to figure out which table you meant based on the model  
+            // VERY IMPORTANT: save your changes at the end! 
+            _context.SaveChanges();
+            return RedirectToAction("SomeAction");
+        } else {
+            // Handle unsuccessful validations
         }
+    }
     ```
-- [x] Create
+- [ ] Form
     ```
-        [HttpPost("monsters/create")]
-        public IActionResult CreateMonster(Monster newMon)
-        {    
-            if(ModelState.IsValid)
-            {
-                // We can take the Monster object created from a form submission
-                // and pass the object through the .Add() method  
-                // Remember that _context is our database  
-                _context.Add(newMon);    
-                // OR _context.Monsters.Add(newMon); if we want to specify the table
-                // EF Core will be able to figure out which table you meant based on the model  
-                // VERY IMPORTANT: save your changes at the end! 
-                _context.SaveChanges();
-                return RedirectToAction("SomeAction");
-            } else {
-                // Handle unsuccessful validations
-            }
-        }
+    <div class="container">
+        <form asp-action="CreateDish" asp-controller="Home" method="POST">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Chef" class="form-label">Chef</label>
+                <input asp-for="Chef" class="form-control" />
+                <span asp-validation-for="Chef"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Tastiness" class="form-label">Tastiness</label>
+                <input asp-for="Tastiness" class="form-control" />
+                <span asp-validation-for="Tastiness"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Calories" class="form-label">Calories</label>
+                <input asp-for="Calories" class="form-control" />
+                <span asp-validation-for="Calories"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </form>
+    </div>
     ```
-- [x] View All
+
+- [ ] View All
     ```
         [HttpGet("")]
         public IActionResult Index()
@@ -306,7 +342,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
             return View();
         }
     ```
-- [x] View One
+- [ ] View One
     ```
     [HttpGet("monsters/{id}")]    
     public IActionResult ShowMonster(int id)    
@@ -315,7 +351,7 @@ if there are errors we can troubleshoot by running `dotnet ef migrations add Fir
         return View(OneMonster);  
     }
     ```
-- [x] Update
+- [ ] Update
     ```
     [HttpGet("monsters/{MonsterId}/edit")]
     public IActionResult EditMonster(int MonsterId)
@@ -356,7 +392,7 @@ Handling Post:
     ```
 
 #### Delete:
-- [x] Process Delete
+- [ ] Process Delete
     ```
     [HttpPost("monsters/{MonsterId}/destroy")]
     public IActionResult DestroyMonster(int MonsterId)
@@ -368,7 +404,7 @@ Handling Post:
         return RedirectToAction("Index");
     }
     ```
-- [x] Form Handling:
+- [ ] Form Handling:
     ```
     <form asp-action="DestroyMonster" asp-controller="Home" asp-route-MonsterId="@Model.MonsterId" method="post">
         <input type="submit" value="Delete">
