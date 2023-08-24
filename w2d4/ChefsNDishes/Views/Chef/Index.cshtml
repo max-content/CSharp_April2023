@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Chef>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col"># of Dishes </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Chef chef in Model)
+            {
+                <tr>
+                    <td @chef.FirstName scope="row"> @chef.FirstName @chef.LastName </td>
+                    <td> @(DateTime.Now.Year - @chef.Birthday.Year) </td>
+                    <td> @chef.AllDishes.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Show Dishes";
+}
+
+@model List<Dish>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Chef</th>
+                <th scope="col">Tastiness</th>
+                <th scope="col">Calories</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Dish dish in Model)
+            {
+                <tr>
+                    <td scope="row">@dish.Name</td>
+                    <td>@dish.Chef.FirstName @dish.Chef.LastName</td>
+                    <td>@dish.Tastiness</td>
+                    <td>@dish.Calories</td>
+                    <td> 
+                        <a asp-controlelr="Dish" asp-action="OneDish" asp-route-DishId="@dish.DishId" >View</a>
+                        <a asp-controller="Dish" asp-action="EditDish" asp-route-DishID="@dish.DishId">Edit</a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

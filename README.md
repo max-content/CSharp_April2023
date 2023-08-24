@@ -410,3 +410,8 @@ Handling Post:
         <input type="submit" value="Delete">
     </form>
     ```
+
+- [ ] Connecting One to Many in the Controller:
+    ```
+        Dish? OneDish = _context.Dishes.Include(c => c.Chef).FirstOrDefault(dish => dish.DishId == DishId);
+    ```
