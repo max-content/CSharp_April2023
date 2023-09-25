@@ -41,9 +41,10 @@ public class DishController : Controller
         {
             _context.Add(dish);
             _context.SaveChanges();
-            return RedirectToAction("OneDishes");
+            return RedirectToAction("OneDish");
         }
-        else{
+        else
+        {
             ViewBag.Chefs = _context.Chefs.ToList();
             return View("NewDish");
         }

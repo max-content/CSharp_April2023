@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Show One";
+}
+
+@model Product
+
+<div class="container">
+    <h1>@Model.Name</h1>
+    <h2>$@Model.Price.ToString("0.00")</h2>
+    <p> @Model.Description</p>
+
+</div>
