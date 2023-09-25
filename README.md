@@ -157,7 +157,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
     }
     ```
     the section added is the ConnectionStrings this adds our database to our project.
-- [x] Change the `Program.cs` file to:
+- [x] Change the `Program.cs` file to below replacing ProjectName with your project's name:
     ```
     using Microsoft.EntityFrameworkCore;
     // You will need access to your models for your context file
@@ -196,7 +196,7 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
     app.Run();
     ```
     #### Models
-- [x] create models
+- [ ] create models
     ```
     #pragma warning disable CS8618
     using System.ComponentModel.DataAnnotations;
@@ -213,7 +213,8 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
     }
     ```
     *standard naming convention for model id is to name ModelNameID allows you to differenciate between different models you're working with.*
-- [x] Add context file. The context file functions as the foundation of the relationship between the models and db.Naming these classes convention is to add Context at the end of the file name.
+
+- [ ] Add MyContext file. The context file functions as the foundation of the relationship between the models and db.Naming these classes convention is to add Context at the end of the file name.
     ```
     #pragma warning disable CS8618
     // We can disable our warnings safely because we know the framework will assign non-null values 
@@ -232,8 +233,8 @@ int? IntVariable = HttpContext.Session.GetInt32("UserAge");
         public DbSet<Monster> Monsters { get; set; } 
     }
     ```
-- [x] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
-- [x] Update db: `dotnet ef database update`
+- [ ] Add migrations in the command line: `dotnet ef migrations add FirstMigration` as you need to migrate continue using the same naming convention ... SecondMigration, ThirdMigration. You can only use a name once per project.
+- [ ] Update db: `dotnet ef database update`
 if there are errors we can troubleshoot by running `dotnet ef migrations add FirstMigration -v` in the command prompt.
 
 #### Controller
@@ -411,7 +412,68 @@ Handling Post:
     </form>
     ```
 
-- [ ] Connecting One to Many in the Controller:
+- [ ] Connecting One to Many in the Controller with .Include:
     ```
         Dish? OneDish = _context.Dishes.Include(c => c.Chef).FirstOrDefault(dish => dish.DishId == DishId);
     ```
+
+### Many to Many
+- Here we create a 3rd table that connects the two tables with the relationship together.
+
+Magazine.cs
+```
+public class Magazine
+{    
+    [Key]
+    public int MagazineId { get; set; }    
+    public string Title { get; set; }  
+    // CreatedAt and UpdatedAt removed for brevity
+    // Our navigation property to our Subscription class
+    // Notice there is NO reference to the Person class   
+    public List<Subscription> Readers { get; set; } = new List<Subscription>();
+}
+```
+
+Person.cs
+```
+public class Person
+{    
+    [Key]
+    public int PersonId { get; set; }    
+    public string Name { get; set; }  
+    // CreatedAt and UpdatedAt removed for brevity
+    // Our Person class also needs a reference to Subscriptions
+    // and contains NO reference to Magazines  
+    public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+}
+```
+
+Subscription.cs
+```
+// using statements and namespace removed for brevity
+public class Subscription
+{
+    [Key]    
+    public int SubscriptionId { get; set; } 
+    // The IDs linking to the adjoining tables   
+    public int PersonId { get; set; }    
+    public int MagazineId { get; set; }
+    // Our navigation properties - don't forget the ?    
+    public Person? Person { get; set; }    
+    public Magazine? Magazine { get; set; }
+}
+```
+This is what the MyContext file will look like at the bottom: 
+```
+public DbSet<Person> People { get; set; } 
+public DbSet<Magazine> Magazines { get; set; } 
+public DbSet<Subscription> Subscriptions { get; set; } 
+```
+
+The controller then looks like this using ThenInclude when we put in the _context:
+```
+Person personWithMags = _context.People    	
+                                .Include(subs => subs.Subscriptions)            
+                                .ThenInclude(sub => sub.Magazine)        
+                                .FirstOrDefault(person => person.PersonId == personId);
+                                ```
