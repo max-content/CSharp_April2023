@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Show One";
+}
+
+@model IndexViewModel
+
+<div class="container">
+    <h1>@Model.Category.Name</h1>
+
+    @await Html.PartialAsync("_AssociationCat", Model.Category.Associations)
+
+    <div class="mb-3">
+        <form asp-action="AddCatAssociation" asp-controller="Category" method="POST">
+            <p>@Model.Category.CategoryId</p>
+            <input type="hidden" name="categoryId" value="@Model.Category.CategoryId">
+            <select class="form-select form-select-lg" name="productId">
+                <option selected>Select one</option>
+                @foreach (Product product in Model.AllProducts)
+                {
+                    <option value="@product.ProductId">@product.Name - @product.ProductId</option>
+
+                }
+            </select>
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

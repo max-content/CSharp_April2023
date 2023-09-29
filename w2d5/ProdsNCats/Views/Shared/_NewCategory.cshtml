@@ -1,0 +1,15 @@
+@model Category
+
+<div class="container">
+    <form asp-action="CreateCategory" asp-controller="Category" method="POST">
+        <div class="mb-3">
+            <label asp-for="@Model.Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name"></span>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
+

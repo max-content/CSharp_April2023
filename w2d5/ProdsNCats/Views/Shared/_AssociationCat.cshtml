@@ -1,0 +1,7 @@
+@model List<Association>
+<ul>
+        @foreach (Association a in Model)
+        {
+            <li> @a.Product.Name </li>
+        }
+    </ul>
